@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:21:12 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 18:48:56 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 23:07:58 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	clean_memory(t_map *map)
 {
 	if (map->map)
 		free_array(map->map);
-	if (map->c_map != NULL)
-		free_array(map->c_map);
 	if (map)
 		free(map);
 }

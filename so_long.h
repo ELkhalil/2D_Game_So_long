@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 22:18:35 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 23:13:55 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include <stdlib.h>
 # include <mlx.h>
 
-/* Get Next Line */
+/* Get Next Line Settings*/
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 11
 # endif
 
 /*Map Storage infos*/
-typedef struct map_infos
+typedef struct map_data
 {
 	char	**map;
 	char	**c_map;
@@ -35,8 +35,29 @@ typedef struct map_infos
 	int		coins;
 	int		p_w;
 	int		p_l;
-	int		door;
 }			t_map;
+
+/* Images Storage infos*/
+typedef struct image
+{
+	void	*bg;
+	void	*pl;
+	void	*wl;
+	void	*cc;
+	void	*ex;
+}			t_img;
+
+/* Game Play infos*/
+typedef struct sol_game
+{
+	t_map	*m_data;
+	t_img	*img;
+	void	*mlx;
+	void	*win;
+}			t_game;
+
+/* Gameplay functions */
+void	so_long(t_game *game);
 
 /* Map hundling fucntions */
 char	**map_reader(char *map_path);
