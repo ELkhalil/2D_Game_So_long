@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 21:35:06 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 22:18:35 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(char *s);
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int		ft_strcmp(char *s1, char *s2);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 
 #endif
