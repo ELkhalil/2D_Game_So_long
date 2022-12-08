@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 12:35:38 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:39:29 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ static int	is_dotber(char *p)
 	return (0);
 }
 
+static int	is_new_line(int fd, char *buffer, char *container)
+{
+	if (buffer[0] == '\n')
+	{
+		reading_leak_hundler(fd, buffer, container);
+		return (0);
+	}
+	return (1);
+}
+
 char	**map_reader(char *map_path)
 {
 	char	*container;
@@ -47,14 +57,11 @@ char	**map_reader(char *map_path)
 		buffer = get_next_line(fd);
 		if (!buffer)
 			break ;
-		if (buffer[0] == '\n')
-		{
-			reading_leak_hundler(fd, buffer, container);
+		if (!is_new_line(fd, buffer, container))
 			return (NULL);
-		}
 		container = ft_strjoin(container, buffer);
 	}
-	if(container[ft_strlen(container) - 1] == '\n')
+	if (container[ft_strlen(container) - 1] == '\n')
 		return (NULL);
 	map = ft_split(container, '\n');
 	reading_leak_hundler(fd, buffer, container);

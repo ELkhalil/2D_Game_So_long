@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:19:58 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 11:47:15 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:37:18 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	t_map *map;
+	t_map	*map;
 
 	if (ac != 2)
 	{
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		exit(0);
-	if (map_checker(map, av[1]))
-		puts("YES VALID !");
+	map_checker(map, av[1]);
 	return (0);
 }

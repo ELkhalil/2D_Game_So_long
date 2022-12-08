@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 12:10:42 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:35:06 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 /* Get Next Line */
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
+#  define BUFFER_SIZE 11
 # endif
 
 /*Map Storage infos*/
@@ -29,10 +29,10 @@ typedef struct map_infos
 {
 	char	**map;
 	char	**c_map;
+	char	**c_map2;
 	int		length;
 	int		width;
 	int		coins;
-	int		p_coins;
 	int		p_w;
 	int		p_l;
 	int		door;
@@ -40,20 +40,25 @@ typedef struct map_infos
 
 /* Map hundling fucntions */
 char	**map_reader(char *map_path);
-int	map_checker(t_map *map, char *map_path);
+int		map_checker(t_map *map, char *map_path);
 
 /* parsing functions */
 int		is_countent_v(char **map);
 int		counter_data(char **map, char c);
 int		width_counter(char **map);
 int		is_map_rectangular(char **map);
-int 	is_walls(char *map);
+int		is_walls(char *map);
 int		is_mapclosed(char **map);
 void	find_player(t_map *tmp);
 int		is_path_valid(t_map *map);
 void	free_array(char **strs);
+
+/*Flood Fill algorithm functions*/
+void	flood_fill_collectibles(char	**map, int i, int j, t_map *sct);
+void	flood_fill_exit(char	**map, int i, int j, t_map *sct);
+
 /*hundle leaks and clean the memory*/
-void    clean_memory(t_map *map);
+void	clean_memory(t_map *map);
 
 /* External Helper functions (from libft but with some editing on them )*/
 char	*get_next_line(int fd);

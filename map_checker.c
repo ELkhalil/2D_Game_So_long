@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:36:38 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 11:47:36 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:33:54 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,21 @@ static char	**is_map_readed(char *map_path)
 	map_check = map_reader(map_path);
 	if (!map_check)
 	{
-		write(2, "Error\n <ISSUE WHILE READING THE MAP>", 28);
+		write(2, "Error\n <ISSUE WHILE READING THE MAP>\n", 38);
 		exit(0);
 	}
 	return (map_check);
+}
+
+/*count the width of the map*/
+int	width_counter(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
 void	init_struct(t_map *sct)
@@ -31,13 +42,13 @@ void	init_struct(t_map *sct)
 	sct->width = width_counter(sct->map);
 	sct->length = ft_strlen(sct->map[0]);
 	sct->coins = counter_data(sct->map, 'C');
-	sct->p_coins = 0;
 }
 
 int	map_checker(t_map *map, char *map_path)
 {
 	map->map = is_map_readed(map_path);
 	map->c_map = is_map_readed(map_path);
+	map->c_map2 = is_map_readed(map_path);
 	if (!is_countent_v(map->map) || counter_data(map->map, 'E') != 1
 		|| counter_data(map->map, 'C') < 1 || counter_data(map->map, 'P') != 1)
 	{

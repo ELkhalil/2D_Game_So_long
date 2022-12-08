@@ -6,24 +6,13 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:41:10 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 12:29:57 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:37:02 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*count the width of the map*/
-int	width_counter(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-int is_walls(char *map)
+int	is_walls(char *map)
 {
 	int	i;
 
@@ -60,25 +49,9 @@ void	find_player(t_map *tmp)
 	}
 }
 
-/*Checking the map path if valid*/
-static void	flood_fill(char	**map, int i, int j, t_map *sct)
+static int	check_map_copies(char **cp_map, char c)
 {
-	if (i < 0 || i >= sct->width || j < 0
-		|| j >= sct->length || map[i][j] == '1')
-		return ;
-	if (map[i][j] == 'C' || map[i][j] == 'E')
-		if (map[i][j] == 'C')
-			sct->p_coins += 1;
-	map[i][j] = '1';
-	flood_fill(sct->c_map, i + 1, j, sct);
-	flood_fill(sct->c_map, i - 1, j, sct);
-	flood_fill(sct->c_map, i, j + 1, sct);
-	flood_fill(sct->c_map, i, j - 1, sct);
-}
-
-static int	re_check_cp_map(char **cp_map)
-{
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -87,26 +60,25 @@ static int	re_check_cp_map(char **cp_map)
 		j = 0;
 		while (cp_map[i][j])
 		{
-			if (cp_map[i][j] != '1')
-				if (cp_map[i][j] != '0')
-					return (0);
+			if (cp_map[i][j] == c)
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	is_path_valid(t_map *map)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	flood_fill(map->c_map, map->p_w, map->p_l, map);
-	if (map->p_coins == map->coins && re_check_cp_map(map->c_map))
+	flood_fill_collectibles(map->c_map, map->p_w, map->p_l, map);
+	flood_fill_exit(map->c_map2, map->p_w, map->p_l, map);
+	if (!check_map_copies(map->c_map, 'C')
+		&& !check_map_copies(map->c_map2, 'E'))
 		return (1);
 	free_array(map->c_map);
+	free_array(map->c_map2);
 	map->c_map = NULL;
+	map->c_map2 = NULL;
 	return (0);
 }
