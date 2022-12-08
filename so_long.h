@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 05:58:37 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 06:11:12 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,17 @@
 #  define BUFFER_SIZE 8
 # endif
 
+/*Map Storage infos*/
 typedef struct map_infos
 {
 	char	**map;
+	char	**c_map;
+	int		length;
+	int		width;
+	int		coins;
+	int		p_x;
+	int		p_x;
+	int		door;
 }			t_map;
 
 /* Map hundling fucntions */

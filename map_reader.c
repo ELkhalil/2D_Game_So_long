@@ -6,20 +6,29 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 05:59:11 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 06:40:41 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+static void	reading_leak_hundler(int fd, char **buffer, char **container)
+{
+	if (buffer)
+		free(buffer);
+	if (container)
+		free(container);
+	close(fd);
+}
+
 char	**map_reader(char *map_path)
 {
-	char	*tmp_map;
+	char	*container;
 	char	*buffer;
 	char	**map;
 	int		fd;
 
-	tmp_map = NULL;
+	container = NULL;
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
@@ -28,11 +37,14 @@ char	**map_reader(char *map_path)
 		buffer = get_next_line(fd);
 		if (!buffer)
 			break ;
-		tmp_map = ft_strjoin(tmp_map, buffer);
+		if (buffer[0] == '\n')
+		{
+			reading_leak_hundler(fd, buffer, container);
+			return (NULL);
+		}
+		container = ft_strjoin(container, buffer);
 	}
-	map = ft_split(tmp_map, '\n');
-	close(fd);
-	free(buffer);
-	free(tmp_map);
+	map = ft_split(container, '\n');
+	reading_leak_hundler(fd, buffer, container);
 	return (map);
 }
