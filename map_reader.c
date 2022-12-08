@@ -6,13 +6,13 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 07:10:34 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:35:38 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	reading_leak_hundler(int fd, char **buffer, char **container)
+static void	reading_leak_hundler(int fd, char *buffer, char *container)
 {
 	if (buffer)
 		free(buffer);
@@ -21,7 +21,7 @@ static void	reading_leak_hundler(int fd, char **buffer, char **container)
 	close(fd);
 }
 
-int	is_dotber(char *p)
+static int	is_dotber(char *p)
 {
 	p += ft_strlen(p) - 4;
 	if (ft_strcmp(p, ".ber") == 0)
@@ -37,7 +37,7 @@ char	**map_reader(char *map_path)
 	int		fd;
 
 	container = NULL;
-	if (!s_dotber(map_path))
+	if (!is_dotber(map_path))
 		return (NULL);
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
@@ -54,6 +54,8 @@ char	**map_reader(char *map_path)
 		}
 		container = ft_strjoin(container, buffer);
 	}
+	if(container[ft_strlen(container) - 1] == '\n')
+		return (NULL);
 	map = ft_split(container, '\n');
 	reading_leak_hundler(fd, buffer, container);
 	return (map);
