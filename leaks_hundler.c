@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:21:12 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 13:15:24 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:27:34 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ void	clean_memory(t_map *map)
 		free_array(map->map);
 	if (map)
 		free(map);
+}
+
+void	clear_images(t_game *game)
+{
+	if (game->img->bg)
+		mlx_destroy_image(game->mlx, game->img->bg);
+	if (game->img->pl)
+		mlx_destroy_image(game->mlx, game->img->bg);
+	if (game->img->wl)
+		mlx_destroy_image(game->mlx, game->img->bg);
+	if (game->img->cc)
+		mlx_destroy_image(game->mlx, game->img->bg);
+	if (game->img->ex)
+		mlx_destroy_image(game->mlx, game->img->bg);
 }
 
 void	free_game(t_game *game)

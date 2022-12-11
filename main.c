@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:19:58 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 11:52:54 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:36:21 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_game	*game;
-	t_map	*map;
 	t_img	*img;
+	t_map	*map;
 
 	if (ac != 2)
 	{

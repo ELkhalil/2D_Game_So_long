@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 21:48:42 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:35:35 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ char	**map_reader(char *map_path)
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	while (1)
+	buffer = get_next_line(fd);
+	while (buffer)
 	{
-		buffer = get_next_line(fd);
-		if (!buffer)
-			break ;
 		if (!is_new_line(fd, buffer, container))
 			return (NULL);
 		container = ft_strjoin(container, buffer);
+		free(buffer);
+		buffer = get_next_line(fd);
 	}
 	if (container[ft_strlen(container) - 1] == '\n')
 		return (NULL);

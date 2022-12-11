@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:26:32 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 13:59:33 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:04:37 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	key_hook_hundler(int key_id, t_game *game)
 	}
 	if (key_id == 13 || key_id == 1 || key_id == 2 || key_id == 0)
 		move_player(game, key_id);
+	system("leaks so_long");
 	return (1);
 }
 
