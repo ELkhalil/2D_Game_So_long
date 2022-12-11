@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 12:15:41 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 14:00:01 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 #  define BUFFER_SIZE 11
 # endif
 
-// /* key symbols */
-// # define D = 2
-// # define A = 0
-// # define W = 13
-// # define S = 1
-// # define ES = 53
+/* key symbols 
+D_key = 2 move right
+A_key = 0 move left
+W_key = 13 move up
+S_key = 1 move down
+ES_key = 53 */
 
 /*Map Storage infos*/
 typedef struct map_data
@@ -66,6 +66,8 @@ typedef struct sol_game
 
 /* Gameplay functions */
 void	so_long(t_game *game);
+int		move_player(t_game *game, int flag);
+void	add_img_to_win(t_game *game, char **map, int i, int j);
 
 /* Map hundling fucntions */
 char	**map_reader(char *map_path);
@@ -81,7 +83,6 @@ int		is_mapclosed(char **map);
 void	find_player(t_map *tmp);
 int		is_path_valid(t_map *map);
 
-
 /*Flood Fill algorithm functions*/
 void	flood_fill_collectibles(char	**map, int i, int j, t_map *sct);
 void	flood_fill_exit(char	**map, int i, int j, t_map *sct);
@@ -90,6 +91,7 @@ void	flood_fill_exit(char	**map, int i, int j, t_map *sct);
 void	clean_memory(t_map *map);
 void	free_game(t_game *game);
 void	free_array(char **strs);
+void	clear_images(t_game *game);
 
 /* External Helper functions (from libft but with some editing on them )*/
 char	*get_next_line(int fd);
