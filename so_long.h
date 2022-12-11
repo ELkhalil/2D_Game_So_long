@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/08 23:13:55 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:45:06 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct sol_game
 	t_img	*img;
 	void	*mlx;
 	void	*win;
+	int		t_size;
 }			t_game;
 
 /* Gameplay functions */
@@ -72,7 +73,7 @@ int		is_walls(char *map);
 int		is_mapclosed(char **map);
 void	find_player(t_map *tmp);
 int		is_path_valid(t_map *map);
-void	free_array(char **strs);
+
 
 /*Flood Fill algorithm functions*/
 void	flood_fill_collectibles(char	**map, int i, int j, t_map *sct);
@@ -80,10 +81,14 @@ void	flood_fill_exit(char	**map, int i, int j, t_map *sct);
 
 /*hundle leaks and clean the memory*/
 void	clean_memory(t_map *map);
+void	free_game(t_game *game);
+void	free_array(char **strs);
 
 /* External Helper functions (from libft but with some editing on them )*/
 char	*get_next_line(int fd);
 void	ft_putstr(char *str);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar_fd(char c, int fd);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);

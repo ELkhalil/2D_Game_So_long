@@ -6,7 +6,7 @@
 #    By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/01 18:40:31 by aelkhali          #+#    #+#              #
-#    Updated: 2022/12/08 22:38:56 by aelkhali         ###   ########.fr        #
+#    Updated: 2022/12/11 11:47:17 by aelkhali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,11 @@ RM = rm -rf
 
 # loading source files : 
 LIBFT = ./libft/ft_putstr.c ./libft/ft_split.c ./libft/ft_strchr.c ./libft/ft_strjoin.c \
-	./libft/ft_strcmp.c ./libft/ft_strlcpy.c ./libft/ft_strlen.c ./libft/ft_substr.c ./libft/get_next_line.c
+	./libft/ft_strcmp.c ./libft/ft_strlcpy.c ./libft/ft_strlen.c ./libft/ft_substr.c ./libft/get_next_line.c \
+	./libft/ft_putnbr_fd.c ./libft/ft_putchar_fd.c
+
 SRCS = $(LIBFT) main.c map_checker.c map_reader.c map_checker_utils.c map_checker_utils2.c leaks_hundler.c \
-	flood_fills.c
+	flood_fills.c so_long.c
 
 all : $(NAME)
 	@echo "You Can Start Playing $(GREEN)*** So long ***"
