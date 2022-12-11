@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:26:32 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 15:04:37 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:42:00 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,14 @@ int	key_hook_hundler(int key_id, t_game *game)
 	}
 	if (key_id == 13 || key_id == 1 || key_id == 2 || key_id == 0)
 		move_player(game, key_id);
-	system("leaks so_long");
 	return (1);
+}
+
+int close_game(t_game *game)
+{
+	write(1, "Good Bye !\n", 12);
+	free_game(game);
+	exit(0);
 }
 
 void	so_long(t_game *game)
@@ -87,5 +93,6 @@ void	so_long(t_game *game)
 	get_imgs_path(game);
 	add_img_to_win(game, game->m_data->map, i, j);
 	mlx_hook(game->win, 2, 0, key_hook_hundler, game);
+	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 }
