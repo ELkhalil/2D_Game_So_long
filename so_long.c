@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:26:32 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 11:51:19 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 12:30:45 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,49 @@ void	add_img_to_win(t_game *game, char **map)
 	}
 }
 
-int	move_player(t_game *game)
+int	move_player(t_game *game, int flag)
 {
 	static int	move;
-
-	if (game->m_data->map[game->m_data->p_w][game->m_data->p_l + 1] == '0')
+	if (ft_strchr("C0E",game->m_data->map[game->m_data->p_w][game->m_data->p_l + 1]) && flag == 2)
 	{
+		if (game->m_data->map[game->m_data->p_w][game->m_data->p_l + 1] == 'E' && !game->m_data->coins)
+			return (free_game(game), exit(0), 1);
+		if (game->m_data->map[game->m_data->p_w][game->m_data->p_l + 1] == 'C')
+			game->m_data->coins--;
 		game->m_data->map[game->m_data->p_w][game->m_data->p_l] = '0';
 		game->m_data->map[game->m_data->p_w][game->m_data->p_l + 1] = 'P';
-		game->m_data->p_l ++;
-		
+		game->m_data->p_l++;
+
+	}
+	else if (ft_strchr("C0E",game->m_data->map[game->m_data->p_w][game->m_data->p_l - 1]) && flag == 0)
+	{
+		if (game->m_data->map[game->m_data->p_w][game->m_data->p_l - 1] == 'E' && !game->m_data->coins)
+			return (free_game(game), exit(0), 1);
+		if (game->m_data->map[game->m_data->p_w][game->m_data->p_l -1] == 'C')
+			game->m_data->coins--;
+		game->m_data->map[game->m_data->p_w][game->m_data->p_l] = '0';
+		game->m_data->map[game->m_data->p_w][game->m_data->p_l - 1] = 'P';
+		game->m_data->p_l--;
+	}
+	else if (ft_strchr("C0E",game->m_data->map[game->m_data->p_w + 1][game->m_data->p_l]) && flag == 1)
+	{
+		if (game->m_data->map[game->m_data->p_w + 1][game->m_data->p_l] == 'E' && !game->m_data->coins)
+			return (free_game(game), exit(0), 1);
+		if (game->m_data->map[game->m_data->p_w + 1][game->m_data->p_l] == 'C')
+			game->m_data->coins--;
+		game->m_data->map[game->m_data->p_w][game->m_data->p_l] = '0';
+		game->m_data->map[game->m_data->p_w + 1][game->m_data->p_l] = 'P';
+		game->m_data->p_w++;
+	}
+	else if (ft_strchr("C0E",game->m_data->map[game->m_data->p_w - 1][game->m_data->p_l]) && flag == 13)
+	{
+		if (game->m_data->map[game->m_data->p_w - 1][game->m_data->p_l] == 'E' && !game->m_data->coins)
+			return (free_game(game), exit(0), 1);
+		if (game->m_data->map[game->m_data->p_w - 1][game->m_data->p_l] == 'C')
+			game->m_data->coins--;
+		game->m_data->map[game->m_data->p_w][game->m_data->p_l] = '0';
+		game->m_data->map[game->m_data->p_w -1][game->m_data->p_l] = 'P';
+		game->m_data->p_w--;
 	}
 	add_img_to_win(game, game->m_data->map);
 	move++;
@@ -80,8 +113,9 @@ int	key_hook_hundler(int key_id, t_game *game)
 		free_game(game);
 		exit(0);
 	}
-	if (key_id == 2)
-		move_player(game);
+	if (key_id == 13 || key_id == 1 || key_id == 2 || key_id == 0)
+		move_player(game, key_id);
+	system("leaks so_long");
 	return (1);
 }
 

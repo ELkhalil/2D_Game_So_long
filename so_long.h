@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 11:45:06 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 12:15:41 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 11
 # endif
+
+// /* key symbols */
+// # define D = 2
+// # define A = 0
+// # define W = 13
+// # define S = 1
+// # define ES = 53
 
 /*Map Storage infos*/
 typedef struct map_data
