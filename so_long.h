@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:39:49 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 14:00:01 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 21:14:57 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		move_player(t_game *game, int flag);
 void	add_img_to_win(t_game *game, char **map, int i, int j);
 
 /* Map hundling fucntions */
-char	**map_reader(char *map_path);
+char	**map_reader(char *map_path, char **map, int fd);
 int		map_checker(t_map *map, char *map_path);
 
 /* parsing functions */

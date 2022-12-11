@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 20:12:23 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 21:26:32 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ static int	is_new_line(int fd, char *buffer, char *container)
 	return (1);
 }
 
-char	**map_reader(char *map_path)
+char	**map_reader(char *map_path, char **map, int fd)
 {
 	char	*container;
 	char	*buffer;
-	char	**map;
-	int		fd;
 
 	container = NULL;
 	if (!is_dotber(map_path))
@@ -66,6 +64,8 @@ char	**map_reader(char *map_path)
 	if (fd == -1)
 		return (NULL);
 	buffer = get_next_line(fd);
+	if (!buffer)
+		return (NULL);
 	while (buffer)
 	{
 		if (!is_new_line(fd, buffer, container))

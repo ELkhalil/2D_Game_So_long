@@ -6,7 +6,7 @@
 #    By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/01 18:40:31 by aelkhali          #+#    #+#              #
-#    Updated: 2022/12/11 13:42:27 by aelkhali         ###   ########.fr        #
+#    Updated: 2022/12/11 21:27:32 by aelkhali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,13 @@ SRCS = $(LIBFT) main.c map_checker.c map_reader.c map_checker_utils.c map_checke
 all : $(NAME)
 	@echo "You Can Start Playing $(GREEN)*** So long ***"
 
-$(NAME) : $(OBJS)
+$(NAME) : $(SRCS)
 	@$(CC) $(FLAGS) $(MLX) $(SRCS) -o $(NAME)
 	@echo "$(BLUE)Compiling the source files... $(STOP)"
 
 clean :
-	@$(RM) $(OBJS)
-	@echo "$(YELLOW)Cleaning the Object files... $(STOP)"
-	
+	@echo "$(YELLOW)Cleaning... $(STOP)"
+
 fclean : clean
 	@$(RM) $(NAME)
 	@echo "$(RED)Deleting The Game ... $(STOP)"

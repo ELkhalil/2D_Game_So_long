@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:36:38 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 11:39:14 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 21:15:16 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static char	**is_map_readed(char *map_path)
 {
 	char	**map_check;
+	char	**map;
+	int		fd;
 
-	map_check = map_reader(map_path);
+	map = NULL;
+	fd = 0;
+	map_check = map_reader(map_path, map, fd);
 	if (!map_check)
 	{
 		write(2, "Error\n <ISSUE WHILE READING THE MAP>\n", 38);
