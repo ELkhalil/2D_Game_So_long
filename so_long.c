@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:26:32 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 15:42:00 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:10:46 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	add_img_to_win(t_game *game, char **map, int i, int j)
 	}
 }
 
-int	key_hook_hundler(int key_id, t_game *game)
+static int	key_hook_hundler(int key_id, t_game *game)
 {
 	if (key_id == 53)
 	{
@@ -73,7 +73,7 @@ int	key_hook_hundler(int key_id, t_game *game)
 	return (1);
 }
 
-int close_game(t_game *game)
+static int	close_game(t_game *game)
 {
 	write(1, "Good Bye !\n", 12);
 	free_game(game);
@@ -88,8 +88,20 @@ void	so_long(t_game *game)
 	i = 0;
 	j = 0;
 	game->mlx = mlx_init();
+	if (!game->mlx)
+	{
+		write(1, "FAILED TO INITIALIZE THE CONNECTION !!\n", 40);
+		free_game(game);
+		exit(0);
+	}
 	game->win = mlx_new_window(game->mlx, game->m_data->length * 65,
 			game->m_data->width * 65, "So Long !");
+	if (!game->win)
+	{
+		write(1, "FAILED TO CREATE THE WINDOW !!\n", 32);
+		free_game(game);
+		exit(0);
+	}
 	get_imgs_path(game);
 	add_img_to_win(game, game->m_data->map, i, j);
 	mlx_hook(game->win, 2, 0, key_hook_hundler, game);

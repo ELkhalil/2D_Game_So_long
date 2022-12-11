@@ -6,7 +6,7 @@
 /*   By: aelkhali <aelkhali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:44:17 by aelkhali          #+#    #+#             */
-/*   Updated: 2022/12/11 15:35:35 by aelkhali         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:12:23 by aelkhali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ static void	reading_leak_hundler(int fd, char *buffer, char *container)
 
 static int	is_dotber(char *p)
 {
+	char	**spl_path;
+	int		i;
+
+	i = 0;
+	spl_path = ft_split(p, '/');
+	while (spl_path[i + 1])
+		i++;
+	if (ft_strlen(spl_path[i]) <= 4)
+	{
+		free_array(spl_path);
+		return (0);
+	}
+	free_array(spl_path);
 	p += ft_strlen(p) - 4;
 	if (ft_strcmp(p, ".ber") == 0)
 		return (1);
